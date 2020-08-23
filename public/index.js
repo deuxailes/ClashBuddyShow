@@ -7,7 +7,7 @@ document.getElementById("searchButton").addEventListener("click", async getName 
     const data = await response.json();
     document.getElementById('textPara').innerHTML = JSON.stringify(data);
 
-    //var playerObj = JSON.parse(data);
+    document.getElementById("profileImg").src = "dragon/10.10.3224670/img/profileicon/" + data.profileIconId + ".png"; 
 
 });
 
