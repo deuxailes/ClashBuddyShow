@@ -1,13 +1,16 @@
+let {PythonShell} = require('python-shell')
+
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
-const APIKEY = 'RGAPI-5bf99818-2d0a-4689-b39f-f276edbd5845';
+const APIKEY = 'RGAPI-0c500f09-462b-4fdd-a32a-3c6a30589f7d';
 
 app.listen(3000, () => console.log('listenting at 3000'));
 app.use(express.static('public'))
 app.use(express.text());
 
 var AWS = require('aws-sdk');
+const { response } = require('express');
 AWS.config.update({region: 'us-east-1'});
 s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
@@ -43,7 +46,6 @@ var bucketParams = {
 }*/
 
 app.post('/api',async (request, response) => { //send data to server (client to server) POST
-    console.log("Summoner name: " + request.body);
 
     const fetch_response = await fetch('https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+ request.body + '?api_key=' + APIKEY);
     const data = await fetch_response.json();
@@ -74,27 +76,65 @@ app.post('/api/ranked',async (request, response) => { //send data to server (cli
     playerValue.winRate = ((wins/(wins+losses)));
     playerValue.currentRank = ranked_data[0].tier + " " + ranked_data[0].rank;
 
+ 
+
+
+
+    response.json(playerValue);
     console.log(playerValue);
-
-
-
-    response.json(ranked_data);
-    console.log(ranked_data);
     //writeToS3(JSON.stringify(data)); // Log Riot API response to S3 playercache S3 Bucket
 
 })
 
+app.post('/api/playerRoles',async (request,response) => {   
 
-function targetMVP(players)
-{
+    //const fetch_response = await fetch('https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+ request.body + '?api_key=' + APIKEY);
+    //const data = await fetch_response.json()
 
-}
+    //const spectator_response = await fetch('https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/%27'+ request.body + '?api_key=' + APIKEY);   
+    //const spectator_data = await spectator_response.json();
+    //console.log(spectator_data);
+    /*
+    const spawn = require("child_process").spawn;
+    const pythonProcess = spawn('python',["role.py", request.body]);
+    pythonProcess.stdout.on('data', data => {
+        response.json(data.toString());
+    })
+    */
+
+   console.log("WHATS BEING THROWN INTO PYTHON ---> " + request.body);
+    var options = {
+        mode: 'text',
+        pythonPath: '/usr/bin/python3',
+        pythonOptions: ['-u'],
+        args: [request.body]
+    };
+
+
+    PythonShell.run('rolefinder.py', options, function (err, results) {
+        if (err) throw err;
+        response.json(results);  
+        console.log(results);
+    });
+
+
+})
+
+
+app.post('/api/currentGame',async (request,response) => {   
+
+    const spectator_response = await fetch('https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/%27'+ request.body + '?api_key=' + APIKEY);   
+    const spectator_data = await spectator_response.json();
+    console.log(spectator_data);
+
+    response.json(spectator_data);
 
 
 
-/*var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var xhttp = new XMLHttpRequest();
-xhttp.open("GET", "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Torko?api_key=RGAPI-1cad6f88-3852-4ca6-ada8-1b58f6e475eb", true);*/
+})
+
+
+
 
 
 

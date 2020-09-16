@@ -13,7 +13,19 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+		<!-- Menu -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="#">Blank</a></li>
+				<li><a href="#">Blank</a></li>
+				<li><a href="#">Blank</a></li>
+			</ul>
+			<ul class="actions stacked">
+				<li><a href="#" class="button primary fit">Search</a></li>
+				<li><a href="#" class="button fit">Under Construction</a></li>
+			</ul>
+		</nav>
 				<!-- Header -->
 					<header id="header" class="alt">
 						<a href="index.html" class="logo"><strong>Clash</strong> <span>Buddy</span></a>
@@ -22,37 +34,27 @@
 						</nav>
 					</header>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#">Blank</a></li>
-							<li><a href="#">Blank</a></li>
-							<li><a href="#">Blank</a></li>
-						</ul>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">Search</a></li>
-							<li><a href="#" class="button fit">Under Construction</a></li>
-						</ul>
-					</nav>
+		
 
 				<!-- Banner -->
 					<section id="banner" class="major">
 						<div class="inner">
 							<header class="major">
 								
-								<!--<h1>Enter Summoner ID</h1>-->
-
-								<form class="needs-validation" novalidate>
-									<div class="form-row">
-									  <div class="col-md-6 mb-3">
-										<input type="text" class="form-control" id="validationTooltip01" placeholder="Summoner Name" required>
+								<div class="grid-container">
+									<div class="item1">
+										<form class="needs-validation" novalidate>
+											<input type="text" class="form-control" id="validationTooltip01" placeholder="Summoner Name" required>
+										</form>
+									</div>
+									<div class="item2">
 										<ul class="actions">
-											<li><a href="#one" class="button next scrolly">Get Started</a></li>
+											<li><a href="#one" id="searchButton" class="button scrolly">Get Started</a></li>
 										</ul>
 									</div>
+								  </div>
+
 								
-							</form>
 							</header>
 							<div class="content">
 								<p>If you've forgotten your ID -<a href="https://recovery.riotgames.com/en/forgot-username">click here!</a>
@@ -65,19 +67,7 @@
 					</section>
 
 
-				<!-- Footer 
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-							</ul>
-						</div>
-					</footer>
--->
+			
 			</div>
 			<script>
 				// Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -107,6 +97,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="index.js"></script>
 
 	</body>
 </html>
